@@ -1,0 +1,277 @@
+body {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(to top, #87ceeb, #f0f8ff);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.sun {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at center, #ffd700, #ffa500);
+  border-radius: 50%;
+  box-shadow: 0 0 50px rgba(255, 165, 0, 0.5);
+}
+
+.cloud {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cloud1 {
+  top: 20%;
+  left: 9%;
+  width: 150px;
+  height: 80px;
+}
+
+.cloud1:before,
+.cloud1:after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+  width: 100px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.cloud1:before {
+  top: -40px;
+  left: 10px;
+}
+
+.cloud1:after {
+  top: -20px;
+  left: 70px;
+}
+
+.cloud2 {
+  top: 30%;
+  right: 17%;
+  width: 100px;
+  height: 50px;
+}
+
+.cloud2:before,
+.cloud2:after {
+  content: "";
+  position: absolute;
+  background: #ffffff;
+  width: 80px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.cloud2:before {
+  top: -20px;
+  left: -10px;
+}
+
+.cloud2:after {
+  top: -10px;
+  left: 40px;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.heading{
+  text-align: center;
+}
+
+.weather-input {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.weather-input input {
+  width: 75%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.weather-input input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 5px rgba(81, 163, 255, 0.5);
+}
+
+.weather-input button {
+  padding: 15px;
+  background: linear-gradient(135deg, rgb(134, 191, 255) 10%, #38bdf8 100%);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.weather-input button:hover {
+  background: linear-gradient(135deg, rgb(110, 178, 255) 10%, #2dbaf7 100%);
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  max-height: 140px;
+  overflow: auto;
+}
+
+.list li {
+  padding: 15px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Scrollbar styles for WebKit browsers */
+.list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Scrollbar styles for Firefox */
+.list {
+  scrollbar-width: thin; /* Options: auto, thin */
+  scrollbar-color: #888 #f1f1f1; /* thumb color, track color */
+}
+
+.list li:hover {
+  background: #efefef;
+}
+
+.list li .weather-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.list li .weather-info .city {
+  font-weight: 500;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.list li .weather-info .city img{
+  margin-left: -10px;
+}
+
+.list li .weather-info .details {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Shared button styles */
+.button {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #16a34a;
+}
+
+/* Specific styles for save-btn */
+.save-btn {
+  background-color: #22c55e; /* Inherited from .button */
+}
+
+.save-btn:hover {
+  background-color: #16a34a; /* Inherited from .button */
+}
+
+/* Specific styles for delete-btn */
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.disabled-btn {
+  background-color: grey;
+  cursor: not-allowed;
+}
+
+.listOfPrevWeathers > h1{
+  font-size: 20px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .weather-input {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .weather-input input,
+  .weather-input button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .list li .delete-btn {
+    align-self: flex-end;
+  }
+}

@@ -1,0 +1,376 @@
+openapi: 3.1.0
+
+info:
+  title: Weather application REST API
+  description: This is E-Weather application rest api..
+  termsOfService: http://example.com
+  contact:
+    name: Demorae Davis
+    url: exampleurl.com
+    email: example@example.com
+  version: 1.0.0
+
+servers:
+  - url: http://localhost/weather_app/libs/php
+    description: this is development server
+
+tags:
+  - name: Weather
+    description: Weather endpoint (public)
+
+paths:
+  /getSavedWeather.php:
+    get:
+      tags:
+        - Weather
+      summary: Retrieve weather data from the Database
+      description: Retrieves all weather data from the database.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        default: 200
+                      name:
+                        type: string
+                        default: "ok"
+                      description:
+                        type: string
+                        default: "success"
+                      returnedIn:
+                        type: string
+                        default: "1 ms"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WeatherData'
+
+        '500':
+          $ref: '#/components/responses/500'
+  
+  /getWeatherInfo.php:
+    get:
+      tags:
+        - Weather
+      summary: Retrieve weather data from the api
+      description: Retrieves all weather data from the database.
+      parameters:
+        - name: cityname
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Name of the city for which weather data is requested
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        default: 200
+                      name:
+                        type: string
+                        default: "ok"
+                      description:
+                        type: string
+                        default: "success"
+                      returnedIn:
+                        type: string
+                        default: "1 ms"
+                  data:
+                    type: object
+                    properties:
+                      location:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          region:
+                            type: string
+                          country:
+                            type: string
+                          lat:
+                            type: number
+                          lon:
+                            type: number
+                          tz_id:
+                            type: string
+                          localtime_epoch:
+                            type: integer
+                          localtime:
+                            type: string
+                      current:
+                        type: object
+                        properties:
+                          last_updated_epoch:
+                            type: integer
+                          last_updated:
+                            type: string
+                          temp_c:
+                            type: number
+                          temp_f:
+                            type: number
+                          is_day:
+                            type: integer
+                          condition:
+                            type: object
+                            properties:
+                              text:
+                                type: string
+                              icon:
+                                type: string
+                              code:
+                                type: integer
+                          wind_mph:
+                            type: number
+                          wind_kph:
+                            type: number
+                          wind_degree:
+                            type: integer
+                          wind_dir:
+                            type: string
+                          pressure_mb:
+                            type: number
+                          pressure_in:
+                            type: number
+                          precip_mm:
+                            type: number
+                          precip_in:
+                            type: number
+                          humidity:
+                            type: integer
+                          cloud:
+                            type: integer
+                          feelslike_c:
+                            type: number
+                          feelslike_f:
+                            type: number
+                          windchill_c:
+                            type: number
+                          windchill_f:
+                            type: number
+                          heatindex_c:
+                            type: number
+                          heatindex_f:
+                            type: number
+                          dewpoint_c:
+                            type: number
+                          dewpoint_f:
+                            type: number
+                          vis_km:
+                            type: number
+                          vis_miles:
+                            type: number
+                          uv:
+                            type: number
+                          gust_mph:
+                            type: number
+                          gust_kph:
+                            type: number
+
+        '500':
+          $ref: '#/components/responses/500'
+
+  /saveWeatherInfo.php:
+    post:
+      tags:
+        - Weather
+      summary: Save weather data into the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city:
+                  type: string
+                country:
+                  type: string
+                temperature:
+                  type: number
+                humidity:
+                  type: number
+                condition:
+                  type: string
+                icon:
+                  type: string
+      responses:
+        '200':
+          description: Successful insertion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      returnedIn:
+                        type: string
+        '500':
+          $ref: '#/components/responses/500'
+
+  /deleteWeather.php:
+    delete:
+      tags:
+        - Weather
+      summary: Delete weather entry by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+      responses:
+        '200':
+          description: Successful deletion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+        '404':
+          description: Weather entry not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+
+components:
+  schemas:
+    WeatherData:
+      type: object
+      properties:
+        id:
+          type: integer
+        city:
+          type: string
+        country:
+          type: string
+        humidity:
+          type: string
+        condition_text:
+          type: string
+        temperature:
+          type: number
+        icon:
+          type: string
+        created_at:
+          type: string
+        
+  responses:
+    "400":
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 400
+              error:
+                type: string
+                example: Bad request
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                      example: email
+                    message:
+                      type: string
+                      example: Invalid email
+
+            required: [code, error]
+
+    "401":
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 401
+              error:
+                type: string
+                example: Unauthorized, please signin and try again
+            required: [code, error]
+
+    "404":
+      description: Not found data
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 404
+              error:
+                type: string
+                example: Not found
+            required: [code, error]
+
+    "500":
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 500
+              error:
+                type: string
+                example: Server error
+            required: [code, error]

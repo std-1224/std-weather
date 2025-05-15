@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./libs/css/style.css" />
+  </head>
+  <body>
+    <div class="sun"></div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="container">
+      <h1 class="heading">Weather Information</h1>
+      <div class="weather-input">
+        <input
+          type="text"
+          id="cityname"
+          placeholder="Enter Latitude/Longitude (decimal degree) or city name"
+        />
+        <button id="runBtn">Get Weather</button>
+      </div>
+      <ul id="weatherList" class="list">
+      </ul>
+
+      <div class="listOfPrevWeathers">
+        <h1>List of weathers</h1>
+        <ul id="saveWeatherList" class="list">
+          <!-- <li>
+            <div class="weather-info">
+              <span class="city"
+                ><img
+                  width="37"
+                  src="//cdn.weatherapi.com/weather/64x64/day/113.png"
+                  alt="icon"
+                />
+                San Francisco</span
+              >
+              <span class="details"
+                >Temperature: 20°C, Humidity: 80%, Clear Sky
+              </span>
+            </div>
+            <button class="button delete-btn">Delete</button>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+
+    <script src="./libs/js/jquery-2.2.3.min.js"></script>
+    <script src="./libs/js/script.js"></script>
+  </body>
+</html>
